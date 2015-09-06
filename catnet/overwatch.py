@@ -2,8 +2,8 @@ import time
 import datetime
 import subprocess
 from collections import OrderedDict
-from turn_module import stop_pulse, c_pulse, cc_pulse
-from compus_module import get_bearing
+from catnet.turning import stop, turn_clockwise, turn_c_clockwise
+from catnet.compass import get_bearing
 import RPi.GPIO as GPIO
 import RPIO
 import threading
@@ -52,11 +52,11 @@ def start_overwatch():
     				current_bearing = current_bearing + 360
     			print current_bearing
     			if current_bearing - target_bearing > 10:
-    				cc_pulse()
+    				turn_c_clockwise()
     			elif current_bearing - target_bearing < -10:
-    				c_pulse()
+    				turn_clockwise()
     			else:
-    				stop_pulse()
+    				stop()
     				break
     			time.sleep(0.02)
 
@@ -103,6 +103,6 @@ def start_overwatch():
     	RPIO.wait_for_interrupts()
 
     finally:
-    	stop_pulse()
+    	stop()
     	GPIO.cleanup()
 
