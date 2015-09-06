@@ -5,7 +5,7 @@ Motion activated turret with webcam
 
 To start cat monitor, simply run:
 
-```
+``` bash
 sudo python main.py
 ```
 
@@ -13,7 +13,7 @@ sudo python main.py
 
 Use cat monitor in your own code:
 
-```
+``` py
 from catnet import start_overwatch
 start_overwatch()
 ```
