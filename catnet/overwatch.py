@@ -14,13 +14,14 @@ def start_overwatch():
     GPIO_sensor = {}
 
     def calibrate(sensor):
-        raw_input("turn to face {} and then press space".format(sensor))
+        raw_input("turn to face {} and then press enter".format(sensor))
         return get_bearing()
 
     print "calibration step"
 
     for sensor in GPIO_list:
         GPIO_sensor[sensor] = calibrate(sensor)
+    raw_input("turn to desired start point, then press enter")
 
 
     #setup the GPIO pins as inputs:
@@ -60,7 +61,7 @@ def start_overwatch():
 
     #setup wait for interupts
     for pin_number in GPIO_sensor.keys():
-        RPIO.add_interrupt_callback(pin_number, callback=motion_detected)
+        RPIO.add_interrupt_callback(pin_number, callback=motion_detected, edge="rising", debounce_timeout_ms=100)
 
     #wait for interupts in try for GPIO cleanup
     try:
