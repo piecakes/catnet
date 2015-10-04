@@ -27,6 +27,7 @@ def motion_bearing():
     for sensor, angle in GPIO_sensors.items():
         if sensor in motion_set:
             motion_bearing.append(angle)
+    print("detected motion at", motion_bearing)
     bearing = sum(motion_bearing)/len(motion_bearing)
     if bearing > 360:
         bearing = bearing - 360
@@ -34,6 +35,7 @@ def motion_bearing():
 
 #Function for activating turret
 def turret(target_bearing):
+    print("turning to", target_bearing);
     while True:
         current_bearing = get_bearing() - angle_offset
         if current_bearing < 0:
