@@ -44,10 +44,9 @@ def start_overwatch():
             while True:
 
                 current_heading = get_bearing()
-                print(motion_bearing, current_heading)
                 difference = motion_bearing - current_heading
 
-                if abs(difference) > 20:
+                if abs(difference) < 20:
                     break
 
                 if motion_bearing < current_heading:
