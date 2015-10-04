@@ -1,5 +1,5 @@
 import math
-from Adafruit_I2C import Adafruit_I2C
+from catnet.adafruit.i2c import Adafruit_I2C
 
 
 LSM303_ADDRESS_MAG   = (0x3C >> 1)  # 0011110x
