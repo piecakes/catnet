@@ -7,8 +7,8 @@ def stop():
   pwm.setPWM(0, 0, 0)
 
 def turn_clockwise():
-  pwm.setPWM(0, 0, 390)
+  pwm.setPWM(0, 0, 380)
 
 def turn_c_clockwise():
-  pwm.setPWM(0, 0, 404)
+  pwm.setPWM(0, 0, 414)
 
