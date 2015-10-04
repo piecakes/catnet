@@ -36,18 +36,20 @@ def motion_bearing():
 #Function for activating turret
 def turret(target_bearing):
     print("turning to", target_bearing);
-    while True:
-        current_bearing = get_bearing() - angle_offset
-        if current_bearing < 0:
-            current_bearing = current_bearing + 360
-        if current_bearing - target_bearing > 10:
-            turn_c_clockwise()
-        elif current_bearing - target_bearing < -10:
-            turn_clockwise()
-        else:
-            stop()
-            break
-        time.sleep(0.02)
+    try:
+        while True:
+            current_bearing = get_bearing() - angle_offset
+            if current_bearing < 0:
+                current_bearing = current_bearing + 360
+            if current_bearing - target_bearing > 10:
+                turn_c_clockwise()
+            elif current_bearing - target_bearing < -10:
+                turn_clockwise()
+            else:
+                break
+            time.sleep(0.02)
+    finally:
+        stop()
 
 #take picture function
 def take_snap():
@@ -108,6 +110,5 @@ def start_overwatch():
     	RPIO.wait_for_interrupts()
 
     finally:
-    	stop()
     	GPIO.cleanup()
 
