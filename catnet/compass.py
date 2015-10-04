@@ -3,7 +3,7 @@ import math
 
 def get_bearing():
     bus = smbus.SMBus(1)
-    address = 0x1e
+    address = 0x3C
 
 
     def read_byte(adr):
