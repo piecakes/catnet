@@ -40,7 +40,6 @@ def turret(target_bearing):
         current_bearing = get_bearing() - angle_offset
         if current_bearing < 0:
             current_bearing = current_bearing + 360
-        print current_bearing
         if current_bearing - target_bearing > 10:
             turn_c_clockwise()
         elif current_bearing - target_bearing < -10:
