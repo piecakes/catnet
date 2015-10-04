@@ -11,9 +11,9 @@ import threading
 
 GPIO_sensors = OrderedDict([
     (23, 0),
-    (24, 90),
+    (24, 117),
     (25, 180),
-    (18, 270),
+    (18, 278),
 ])
 
 #Create a variable called daemon running, and a global set
