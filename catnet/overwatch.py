@@ -35,6 +35,7 @@ def start_overwatch():
     def take_picture():
         file_name = (datetime.datetime.now()).strftime('%Y-%m-%d-%H-%M-%S')
         subprocess.call('fswebcam --device v4l2:/dev/video0 --input 0 --resolution 320x240 --skip 50 --jpeg 80 /home/jenny/test/image-{}.jpg'.format(file_name), shell=True)
+        print("SNAP! You're on catnet camera!")
 
     # Function for what to do on motion, wrapped in a fail safe
 
