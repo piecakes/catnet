@@ -39,22 +39,29 @@ def start_overwatch():
 
     # Function for what to do on motion, wrapped in a fail safe
 
-    def motion_detected(motion, value):
+    def motion_detected(active_sensor, value):
         try:
-            motion_bearing = GPIO_sensor[motion]
+            motion = GPIO_sensor[active_sensor]
+
             while True:
 
-                current_heading = get_bearing()
-                difference = motion_bearing - current_heading
+            bearing = get_bearing()
+            difference = abs(bearing - motion)
 
-                if abs(difference) < 20:
-                    break
-
-                if motion_bearing < current_heading:
+            if difference > 20:
+                stop()
+            elif bearing_angle > motion_angle:
+                # Motion is anti-clockwise of bearing.
+                if bearing_angle - motion_angle < 180:
                     turn_c_clockwise()
-
-                if current_heading < motion_bearing:
+                else:
                     turn_clockwise()
+            else:
+                # Motion is clockwise of bearing.
+                if motion_angle - bearing_angle < 180:
+                    turn_clockwise()
+                else:
+                    turn_c_clockwise()
 
         finally:
             stop()
