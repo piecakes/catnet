@@ -51,7 +51,6 @@ def start_overwatch():
 
                 if difference < 20:
                     stop()
-                    time.sleep(1)
                     break
                 elif bearing_angle > motion_angle:
                     # Motion is anti-clockwise of bearing.
