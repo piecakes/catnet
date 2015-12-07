@@ -31,7 +31,7 @@ def start_overwatch():
     GPIO.setmode(GPIO.BCM)
 
     for sensor in GPIO_sensor.keys():
-        GPIO.setup(sensor, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(sensor, GPIO.IN)
 
 
     # Function for what to do on motion, wrapped in a fail safe
@@ -69,7 +69,7 @@ def start_overwatch():
     #setup wait for interupts
     for pin_number in GPIO_sensor.keys():
         print "Setting up sensor {}".format(pin_number)
-        RPIO.add_interrupt_callback(pin_number, callback=motion_detected, edge="rising", debounce_timeout_ms=100)
+        RPIO.add_interrupt_callback(pin_number, callback=motion_detected, edge="rising")
 
     #wait for interupts in try for GPIO cleanup
     try:
