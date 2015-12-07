@@ -44,11 +44,9 @@ def start_overwatch():
             while True:
 
                 bearing_angle = get_bearing()
-                print bearing_angle
                 difference = abs(bearing_angle - motion_angle)
 
                 if difference < 20:
-                    print "stop"
                     stop()
                     time.sleep(1)
                     break
