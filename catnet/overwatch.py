@@ -70,6 +70,7 @@ def start_overwatch():
 
     #setup wait for interupts
     for pin_number in GPIO_sensor.keys():
+        print "Setting up sensor {}".format(pin_number)
         RPIO.add_interrupt_callback(pin_number, callback=motion_detected, edge="rising", debounce_timeout_ms=100)
 
     #wait for interupts in try for GPIO cleanup
