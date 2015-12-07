@@ -21,6 +21,7 @@ def start_overwatch():
 
     for sensor in GPIO_list:
         GPIO_sensor[sensor] = calibrate(sensor)
+        print "{} is {}".format(sensor, GPIO_sensor[sensor])
     raw_input("turn to desired start point, then press enter")
 
 
@@ -31,24 +32,22 @@ def start_overwatch():
     for sensor in GPIO_sensor.keys():
         GPIO.setup(sensor, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-    #function for taking picture
-    def take_picture():
-        file_name = (datetime.datetime.now()).strftime('%Y-%m-%d-%H-%M-%S')
-        subprocess.call('fswebcam --device v4l2:/dev/video0 --input 0 --resolution 320x240 --skip 50 --jpeg 80 /home/jenny/test/image-{}.jpg'.format(file_name), shell=True)
-        print("SNAP! You're on catnet camera!")
 
     # Function for what to do on motion, wrapped in a fail safe
 
     def motion_detected(active_sensor, value):
         try:
+            print "motion detected on {}".format(active_sensor)
             motion_angle = GPIO_sensor[active_sensor]
 
             while True:
 
                 bearing_angle = get_bearing()
+                print bearing_angle
                 difference = abs(bearing_angle - motion_angle)
 
                 if difference < 20:
+                    print "stop"
                     stop()
                 elif bearing_angle > motion_angle:
                     # Motion is anti-clockwise of bearing.
