@@ -41,31 +41,30 @@ def start_overwatch():
 
     def motion_detected(active_sensor, value):
         try:
-            motion = GPIO_sensor[active_sensor]
+            motion_angle = GPIO_sensor[active_sensor]
 
             while True:
 
-            bearing = get_bearing()
-            difference = abs(bearing - motion)
+                bearing_angle = get_bearing()
+                difference = abs(bearing_angle - motion_angle)
 
-            if difference > 20:
-                stop()
-            elif bearing_angle > motion_angle:
-                # Motion is anti-clockwise of bearing.
-                if bearing_angle - motion_angle < 180:
-                    turn_c_clockwise()
+                if difference < 20:
+                    stop()
+                elif bearing_angle > motion_angle:
+                    # Motion is anti-clockwise of bearing.
+                    if bearing_angle - motion_angle < 180:
+                        turn_c_clockwise()
+                    else:
+                        turn_clockwise()
                 else:
-                    turn_clockwise()
-            else:
-                # Motion is clockwise of bearing.
-                if motion_angle - bearing_angle < 180:
-                    turn_clockwise()
-                else:
-                    turn_c_clockwise()
+                    # Motion is clockwise of bearing.
+                    if motion_angle - bearing_angle < 180:
+                        turn_clockwise()
+                    else:
+                        turn_c_clockwise()
 
         finally:
             stop()
-        take_picture()
 
     #setup wait for interupts
     for pin_number in GPIO_sensor.keys():
