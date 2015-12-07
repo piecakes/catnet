@@ -4,6 +4,7 @@ from catnet.turning import stop, turn_clockwise, turn_c_clockwise
 from catnet.compass import get_bearing
 import RPi.GPIO as GPIO
 import RPIO
+import time
 
 GPIO_list = [18, 23, 24, 25]
 
@@ -49,6 +50,8 @@ def start_overwatch():
                 if difference < 20:
                     print "stop"
                     stop()
+                    time.sleep(1)
+                    break
                 elif bearing_angle > motion_angle:
                     # Motion is anti-clockwise of bearing.
                     if bearing_angle - motion_angle < 180:
