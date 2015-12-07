@@ -35,8 +35,11 @@ def start_overwatch():
 
 
     # Function for what to do on motion, wrapped in a fail safe
-
+    in_motion = [False]
     def motion_detected(active_sensor, value):
+        if in_motion[0]:
+            return
+        in_motion[0] = True
         try:
             print "motion detected on {}".format(active_sensor)
             motion_angle = GPIO_sensor[active_sensor]
@@ -65,11 +68,12 @@ def start_overwatch():
 
         finally:
             stop()
+            in_motion[0] = False
 
     #setup wait for interupts
     for pin_number in GPIO_sensor.keys():
         print "Setting up sensor {}".format(pin_number)
-        RPIO.add_interrupt_callback(pin_number, callback=motion_detected, edge="rising")
+        RPIO.add_interrupt_callback(pin_number, threaded_callback=True, callback=motion_detected, edge="rising")
 
     #wait for interupts in try for GPIO cleanup
     try:
