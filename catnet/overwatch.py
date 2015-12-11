@@ -48,9 +48,9 @@ def start_overwatch():
             else:
                 # Motion is clockwise of bearing.
                 if motion_angle - bearing_angle < 180:
-                    turn_clockwise()
-                else:
                     turn_c_clockwise()
+                else:
+                    turn_clockwise()
 
     #poll motion sensors
     try:
