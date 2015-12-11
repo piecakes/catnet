@@ -55,6 +55,7 @@ def start_overwatch():
     #poll motion sensors
     try:
         while True:
+            print "polling sensors"
             for sensor in GPIO_list:
                 if GPIO.input(sensor) == True:
                     print "motion detected on sensor {}".format(sensor)
