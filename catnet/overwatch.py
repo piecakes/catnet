@@ -36,6 +36,8 @@ def start_overwatch():
 
             if difference < 20:
                 stop()
+                print "turned to {}".format(bearing_angle)
+                time.sleep(1)
                 break
             elif bearing_angle > motion_angle:
                 # Motion is anti-clockwise of bearing.
@@ -55,6 +57,7 @@ def start_overwatch():
         while True:
             for sensor in GPIO_list:
                 if GPIO.input(sensor) == True:
+                    print "motion detected on sensor {}".format(sensor)
                     motion_detected(sensor)
             time.sleep(0.1)
     finally:
